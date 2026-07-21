@@ -6,6 +6,7 @@ import { MyStore } from "../Context/MyContext";
 import ProductCard from "./ProductCard";
 
 const Products = () => {
+  
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const { isCartOpen, setIsCartOpen, products } = useContext(MyStore);
@@ -15,7 +16,7 @@ const Products = () => {
     ...new Set(products.map((product) => product.category)),
   ];
 
-  console.log(categories);
+  // console.log(categories);
   
 
   const filteredProducts =

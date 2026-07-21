@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { X } from "lucide-react";
+import { MyStore } from "../Context/MyContext";
+import CartCard from "./CartCard";
 
 const Cart = ({ isCartOpen, setIsCartOpen }) => {
+  const { cartData } = useContext(MyStore);
   return (
     <>
       {/* Background */}
@@ -29,7 +32,15 @@ const Cart = ({ isCartOpen, setIsCartOpen }) => {
 
         {/* Items */}
 
-        <div className="p-6 text-zinc-400">Your cart is empty.</div>
+        {cartData.length > 0 ? (
+          cartData.map((product) => (
+            <CartCard key={product.id} product={product} />
+          ))
+        ) : (
+          <div className="p-6 text-zinc-400 text-center">
+            Your cart is empty.
+          </div>
+        )}
 
         {/* Footer */}
 

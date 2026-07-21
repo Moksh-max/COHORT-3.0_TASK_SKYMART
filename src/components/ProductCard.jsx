@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Star, ShoppingCart } from "lucide-react";
+import { MyStore } from "../Context/MyContext";
 
 const ProductCard = ({ product }) => {
-  return (
-    <div className="group bg-[#111] rounded-3xl overflow-hidden border border-zinc-800 hover:border-[#C8F400] transition-all duration-300 hover:-translate-y-2">
+  const { setCartData, cartData , setIsCartOpen } = useContext(MyStore);
 
+ const handleAddToCart = () => {
+  let updatedCart;
+
+  const existingItem = cartData.find(
+    (item) => item.id === product.id
+  );
+
+  if (existingItem) {
+    updatedCart = cartData.map((item) =>
+      item.id === product.id
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    );
+  } else {
+    updatedCart = [
+      ...cartData,
+      { ...product, quantity: 1 },
+    ];
+  }
+
+  setCartData(updatedCart);
+
+  localStorage.setItem(
+    "cartData",
+    JSON.stringify(updatedCart)
+  );
+
+  setIsCartOpen(true);
+};
+
+  return (
+
+    
+    <div className="group bg-[#111] rounded-3xl overflow-hidden border border-zinc-800 hover:border-[#C8F400] transition-all duration-300 hover:-translate-y-2">
       {/* Image */}
       <div className="h-64 bg-white p-6 flex items-center justify-center overflow-hidden">
         <img
@@ -16,7 +50,6 @@ const ProductCard = ({ product }) => {
 
       {/* Details */}
       <div className="p-5">
-
         {/* Category */}
         <span className="text-xs uppercase tracking-wider text-[#C8F400]">
           {product.category}
@@ -29,14 +62,9 @@ const ProductCard = ({ product }) => {
 
         {/* Rating */}
         <div className="flex items-center gap-2 mt-3">
-          <Star
-            size={18}
-            className="fill-yellow-400 text-yellow-400"
-          />
+          <Star size={18} className="fill-yellow-400 text-yellow-400" />
 
-          <span className="text-sm text-zinc-300">
-            {product.rating.rate}
-          </span>
+          <span className="text-sm text-zinc-300">{product.rating.rate}</span>
 
           <span className="text-xs text-zinc-500">
             ({product.rating.count} reviews)
@@ -50,18 +78,18 @@ const ProductCard = ({ product }) => {
 
         {/* Bottom */}
         <div className="flex justify-between items-center mt-6">
-
           <h3 className="text-2xl font-bold text-[#C8F400]">
             ${product.price}
           </h3>
 
-          <button className="flex items-center gap-2 bg-[#C8F400] text-black px-4 py-2 rounded-xl font-semibold hover:scale-105 transition">
+          <button
+            onClick={handleAddToCart}
+            className="flex items-center gap-2 bg-[#C8F400] text-black px-4 py-2 rounded-xl font-semibold hover:scale-105 transition"
+          >
             <ShoppingCart size={18} />
             Add
           </button>
-
         </div>
-
       </div>
     </div>
   );

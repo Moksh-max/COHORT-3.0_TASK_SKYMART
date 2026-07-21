@@ -5,6 +5,7 @@ import axios from "axios";
 export const MyStore = createContext();
 
 export const ContextProvider = ({ children }) => {
+  //api call
   const [products, setProducts] = useState([]);
 
   const getData = async () => {
@@ -23,6 +24,14 @@ export const ContextProvider = ({ children }) => {
   }, []);
 
   // -------------------------------------------
+
+  //cartData
+  const [cartData, setCartData] = useState(() => {
+    return JSON.parse(localStorage.getItem("cartData")) || [];
+  });
+  console.log(cartData);
+
+  //-------------------------------------------
 
   const [currentUser, setCurrentUser] = useState(() => {
     return JSON.parse(localStorage.getItem("currentUser"));
@@ -53,6 +62,8 @@ export const ContextProvider = ({ children }) => {
         setIsCartOpen,
         products,
         setProducts,
+        cartData,
+        setCartData,
       }}
     >
       {children}
