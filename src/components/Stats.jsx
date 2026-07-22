@@ -12,7 +12,7 @@ import { MyStore } from "../Context/MyContext";
 
 
 const Stats = () => {
-const {cartItems} = useContext(MyStore);
+const {cartItems , cartValue} = useContext(MyStore);
 
 const stats = [
   {
@@ -23,7 +23,7 @@ const stats = [
     color: "bg-lime-500/10 text-[#C8F400]",
   },
   {
-    title: "₹0.00",
+    title: `${cartValue.toFixed(2)}`,
     subtitle: "Cart Value",
     desc: "Ready to checkout",
     icon: <IndianRupee size={24} />,

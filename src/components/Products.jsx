@@ -26,7 +26,7 @@ const Products = () => {
 
   return (
     <main className="min-h-screen bg-[#0B0B0B] text-white px-6  ">
-      <Navbar />
+      {/* <Navbar /> */}
 
       <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
 

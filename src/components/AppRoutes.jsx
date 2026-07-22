@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Routes } from "react-router";
 import HomePage from "../pages/HomePage";
 import SignIn from "../Components/SignIn";
@@ -9,19 +9,81 @@ import Products from "../Components/Products";
 import About from "../Components/About";
 import CategoryProducts from "../Components/CategoryProducts";
 import ProductInfo from "../Components/ProductInfo";
+import Navbar from "../components/Navbar";
+import ProtectedRoute from "../Components/ProtectedRoute";
+import PublicRoute from "../Components/PublicRoute";
+import { MyStore } from "../Context/MyContext";
 
 const AppRoutes = () => {
+  const {currentUser} = useContext(MyStore)
   return (
-    <div>
-      <Routes>
-        <Route path="/home" element={<HomePage />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/" element={<WelcomeSignIn />} />
-        <Route path="/signUp" element={<WelcomeSignUp />} />
-        <Route path="/category/:categoryName" element={<CategoryProducts />} />
-        <Route path="/product/:id" element={<ProductInfo />} />
-      </Routes>
+    <div className="text-white pr-20 ">
+      {currentUser && <Navbar />}
+      <div className={currentUser ? "pt-20" : ""}>
+        <Routes>
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute>
+                <HomePage />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute>
+                <Products />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/about"
+            element={
+              <ProtectedRoute>
+                <About />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/category/:categoryName"
+            element={
+              <ProtectedRoute>
+                <CategoryProducts />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/product/:id"
+            element={
+              <ProtectedRoute>
+                <ProductInfo />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <PublicRoute>
+                <WelcomeSignIn />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/signUp"
+            element={
+              <PublicRoute>
+                <WelcomeSignUp />
+              </PublicRoute>
+            }
+          />
+        </Routes>
+      </div>
     </div>
   );
 };

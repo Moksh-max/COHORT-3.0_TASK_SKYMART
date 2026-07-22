@@ -12,13 +12,13 @@ const Navbar = () => {
   const handleLogout = () => {
     setCurrentUser(null);
     localStorage.removeItem("currentUser");
-    navigate("/signUp");
+    navigate("/");
   };
 
   //   const { currentUser } = useContext(MyStore);
   const navigate = useNavigate();
   return (
-    <header className="sticky top-0 z-50 bg-[#0B0B0B]/90 backdrop-blur-md border-b border-zinc-800">
+    <header className="fixed top-0 left-0 w-full  z-50 bg-[#0B0B0B]/90 backdrop-blur-md border-b border-zinc-800">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-3">

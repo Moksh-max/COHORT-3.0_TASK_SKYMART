@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Watch } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
 import { MyStore } from "../Context/MyContext";
 import { toast } from "react-toastify";
@@ -7,31 +7,40 @@ import { toast } from "react-toastify";
 const SignUp = () => {
   const navigate = useNavigate();
 
-  const {setCurrentUser} = useContext(MyStore);
+  const { setCurrentUser } = useContext(MyStore);
 
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     formState: { errors },
   } = useForm({
     mode: "onChange",
   });
 
+  const password = watch("password");
+
   let { users, setUsers } = useContext(MyStore);
 
   const formSubmit = (data) => {
-    toast.success("Login Successful 🎉");
+    const alreadyExists = users.some((user) => user.email === data.email);
+
+    if (alreadyExists) {
+      toast.error("Email is already registered!");
+      return;
+    }
+
+    toast.success("Account Created Successfully 🎉");
 
     const updatedUsers = [...users, data];
 
     setUsers(updatedUsers);
-
     localStorage.setItem("users", JSON.stringify(updatedUsers));
 
-    navigate("/home");
     setCurrentUser(data);
-    
+    navigate("/home");
+
     reset();
   };
 
@@ -138,9 +147,17 @@ const SignUp = () => {
 
             <input
               type="password"
+              {...register("confirmPassword", {
+                required: "Confirm Password is required",
+                validate: (value) =>
+                  value === password || "Passwords do not match",
+              })}
               placeholder="Confirm your password"
               className="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 sm:px-5 py-3 text-white placeholder-gray-500 outline-none focus:border-[#C8F400] transition"
             />
+            {errors.confirmPassword && (
+              <p className="text-red-500">{errors.confirmPassword.message}</p>
+            )}
           </div>
 
           {/* Terms */}

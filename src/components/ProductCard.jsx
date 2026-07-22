@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Star, ShoppingCart } from "lucide-react";
 import { MyStore } from "../Context/MyContext";
 import { toast } from "react-toastify";
@@ -9,11 +9,12 @@ const ProductCard = ({ product }) => {
   const { setCartData, cartData, setIsCartOpen, cartItems, setcartItems } =
     useContext(MyStore);
 
-  const handleAddToCart = () => {
-    toast.success("Added to Cart✅");
-    let updatedCart;
+  const added = cartData.some((item) => item.id === product.id);
 
+  const handleAddToCart = () => {
     const existingItem = cartData.find((item) => item.id === product.id);
+
+    let updatedCart;
 
     if (existingItem) {
       updatedCart = cartData.map((item) =>
@@ -23,22 +24,21 @@ const ProductCard = ({ product }) => {
       );
     } else {
       updatedCart = [...cartData, { ...product, quantity: 1 }];
-      setcartItems(cartItems + 1);
+      setcartItems(cartData.length + 1);
+      toast.success("Added to Cart ✅");
     }
 
     setCartData(updatedCart);
-
-    localStorage.setItem("cartData", JSON.stringify(updatedCart));
-
     setIsCartOpen(true);
+    // console.log(updatedCart);
   };
 
   return (
-    <div  className="group bg-[#111] rounded-3xl overflow-hidden border border-zinc-800 hover:border-[#C8F400] transition-all duration-300 hover:-translate-y-2">
+    <div className="group bg-[#111] rounded-3xl overflow-hidden border border-zinc-800 hover:border-[#C8F400] transition-all duration-300 hover:-translate-y-2">
       {/* Image */}
       <div className="h-64 bg-white p-6 flex items-center justify-center overflow-hidden">
         <img
-        onClick={()=> navigate(`/product/${product.id}`)}
+          onClick={() => navigate(`/product/${product.id}`)}
           src={product.image}
           alt={product.title}
           className="h-full object-contain group-hover:scale-110 transition duration-500"
@@ -79,13 +79,23 @@ const ProductCard = ({ product }) => {
             ${product.price}
           </h3>
 
-          <button
-            onClick={handleAddToCart}
-            className="flex items-center gap-2 bg-[#C8F400] text-black px-4 py-2 rounded-xl font-semibold hover:scale-105 transition"
-          >
-            <ShoppingCart size={18} />
-            Add
-          </button>
+          {!added ? (
+            <button
+              onClick={handleAddToCart}
+              className="flex items-center gap-2 bg-[#C8F400] text-black px-4 py-2 rounded-xl font-semibold hover:scale-105 transition"
+            >
+              <ShoppingCart size={18} />
+              Add
+            </button>
+          ) : (
+            <button
+              disabled
+              className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-xl cursor-not-allowed"
+            >
+              <ShoppingCart size={18} />
+              Added ✓
+            </button>
+          )}
         </div>
       </div>
     </div>

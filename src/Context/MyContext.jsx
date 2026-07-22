@@ -5,10 +5,6 @@ import axios from "axios";
 export const MyStore = createContext();
 
 export const ContextProvider = ({ children }) => {
-
-
-
-
   //api call
   const [products, setProducts] = useState([]);
 
@@ -30,18 +26,34 @@ export const ContextProvider = ({ children }) => {
   // -------------------------------------------
 
   //cartData
+
   const [cartData, setCartData] = useState(() => {
     return JSON.parse(localStorage.getItem("cartData")) || [];
   });
-  // console.log(cartData);
 
   const [cartItems, setcartItems] = useState(() => {
     return JSON.parse(localStorage.getItem("cartItems")) || 0;
   });
 
+  const [cartValue, setCartValue] = useState(() => {
+    return JSON.parse(localStorage.getItem("cartValue")) || 0;
+  });
+
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
+    const totalItems = cartData.reduce((sum, item) => sum + item.quantity, 0);
+
+    const totalValue = cartData.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0,
+    );
+
+    setcartItems(totalItems);
+    setCartValue(totalValue);
+
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+    localStorage.setItem("cartItems", JSON.stringify(totalItems));
+    localStorage.setItem("cartValue", JSON.stringify(totalValue));
+  }, [cartData]);
 
   //-------------------------------------------
 
@@ -78,6 +90,8 @@ export const ContextProvider = ({ children }) => {
         setCartData,
         cartItems,
         setcartItems,
+        cartValue,
+        setCartValue,
       }}
     >
       {children}

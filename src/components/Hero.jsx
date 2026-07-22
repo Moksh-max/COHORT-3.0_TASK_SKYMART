@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 const Hero = () => {
   const navigate = useNavigate();
-  const { currentUser } = useContext(MyStore);
+  const { currentUser} = useContext(MyStore);
   return (
     <section className="max-w-7xl mx-auto mt-10">
       <div

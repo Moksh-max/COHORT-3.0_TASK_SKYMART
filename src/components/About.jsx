@@ -41,7 +41,7 @@ const About = () => {
 
   return (
     <main className="min-h-screen bg-[#0B0B0B] text-white">
-      <Navbar />
+      {/* <Navbar /> */}
 
       <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
 

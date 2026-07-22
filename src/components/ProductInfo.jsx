@@ -43,7 +43,7 @@ const ProductInfo = () => {
   if (!product) {
     return (
       <div className="text-white">
-        <Navbar setIsCartOpen={setIsCartOpen} />
+        {/* <Navbar setIsCartOpen={setIsCartOpen} /> */}
         <div className="min-h-screen bg-[#0B0B0B] flex items-center justify-center text-white text-2xl">
           Loading...
         </div>

@@ -3,22 +3,37 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { MyStore } from "../Context/MyContext";
 
 const CartCard = ({ product }) => {
-  const { cartData, setCartData , setcartItems , cartItems } = useContext(MyStore);
+  // console.log(product);
+  
+  const { cartData, setCartData, setcartItems, cartItems ,  } =
+    useContext(MyStore);
 
+  const increaseQuantity = (id) => {
+    setCartData(
+      cartData.map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity + 1 } : item,
+      ),
+    );
+  };
+
+  const decreaseQuantity = (id) => {
+    const updatedCart = cartData
+      .map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
+      )
+      .filter((item) => item.quantity > 0);
+
+    setCartData(updatedCart);
+  };
 
   const deleteProduct = () => {
-  const updatedCart = cartData.filter(
-    (item) => item.id !== product.id
-  );
+    const updatedCart = cartData.filter((item) => item.id !== product.id);
 
-  setCartData(updatedCart);
-  setcartItems(cartItems - 1)
+    setCartData(updatedCart);
+    setcartItems(cartItems - 1);
 
-  localStorage.setItem(
-    "cartData",
-    JSON.stringify(updatedCart)
-  );
-};
+    localStorage.setItem("cartData", JSON.stringify(updatedCart));
+  };
   return (
     <div className="flex gap-4 bg-[#111] border border-zinc-800 rounded-2xl p-4 hover:border-[#C8F400] transition-all duration-300">
       {/* Product Image */}
@@ -50,19 +65,28 @@ const CartCard = ({ product }) => {
         <div className="flex justify-between items-center mt-3">
           {/* Quantity */}
           <div className="flex items-center bg-[#1A1A1A] rounded-lg overflow-hidden">
-            <button className="p-2 hover:bg-zinc-700 transition">
+            <button
+              onClick={() => decreaseQuantity(product.id)}
+              className="p-2 hover:bg-zinc-700 transition"
+            >
               <Minus size={16} />
             </button>
 
-            <span className="px-4 font-semibold">1</span>
+            <span className="px-4 font-semibold">{product.quantity}</span>
 
-            <button  className="p-2 hover:bg-zinc-700 transition">
+            <button
+              onClick={() => increaseQuantity(product.id)}
+              className="p-2 hover:bg-zinc-700 transition"
+            >
               <Plus size={16} />
             </button>
           </div>
 
           {/* Delete */}
-          <button onClick={deleteProduct} className="text-red-500 hover:text-red-400 transition">
+          <button
+            onClick={deleteProduct}
+            className="text-red-500 hover:text-red-400 transition"
+          >
             <Trash2 size={20} />
           </button>
         </div>

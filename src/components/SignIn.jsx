@@ -22,11 +22,11 @@ const SignIn = () => {
     );
 
     if (user) {
-     toast.success("Login Successful 🎉");
+  toast.success("Login Successful 🎉");
 
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      navigate("/home");
-    } else {
+  setCurrentUser(user);
+   navigate("/home");
+} else {
        toast.error("Invalid Email or Password ❌");
     }
 
