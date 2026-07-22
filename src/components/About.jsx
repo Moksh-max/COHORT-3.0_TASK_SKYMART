@@ -7,10 +7,10 @@ import {
   Users,
   Award,
 } from "lucide-react";
-import Navbar from "./Navbar";
+import Navbar from "../Components/Navbar";
 import { useNavigate } from "react-router";
 import { MyStore } from "../Context/MyContext";
-import Cart from "./Cart";
+import Cart from "../Components/Cart";
 
 const features = [
   {

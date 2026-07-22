@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import { MyStore } from "../Context/MyContext";
-import Navbar from "./Navbar";
+import Navbar from "../Components/Navbar";
 import { Star, ShoppingCart, Heart } from "lucide-react";
-import Cart from "./Cart";
+import Cart from "../Components/Cart";
 import { toast } from "react-toastify";
 
 const ProductInfo = () => {
@@ -58,7 +58,7 @@ const ProductInfo = () => {
 
       <Cart isCartOpen={isCartOpen} setIsCartOpen={setIsCartOpen} />
 
-      
+
       {/* Product Section */}
       <section className="max-w-7xl mx-auto px-8 py-12 grid lg:grid-cols-2 gap-16 items-center">
         {/* Left */}

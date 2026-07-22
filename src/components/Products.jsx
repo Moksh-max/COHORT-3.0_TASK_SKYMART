@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Search, Star, ShoppingCart } from "lucide-react";
-import Navbar from "./Navbar";
-import Cart from "./Cart";
+import Navbar from "../Components/Navbar";
+import Cart from "../Components/Cart";
 import { MyStore } from "../Context/MyContext";
-import ProductCard from "./ProductCard";
+import ProductCard from "../Components/ProductCard";
 
 const Products = () => {
   

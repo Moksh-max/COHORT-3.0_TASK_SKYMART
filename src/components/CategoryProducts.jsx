@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { MyStore } from "../Context/MyContext";
 import ProductCard from "../Components/ProductCard";
-import Navbar from "./Navbar";
-import Cart from "./Cart";
+import Navbar from "../Components/Navbar";
+import Cart from "../Components/Cart";
 
 const CategoryProducts = () => {
   const { isCartOpen, setIsCartOpen } = useContext(MyStore);

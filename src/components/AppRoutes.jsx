@@ -1,14 +1,14 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import HomePage from "../pages/HomePage";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
+import SignIn from "../Components/SignIn";
+import SignUp from "../Components/SignUp";
 import WelcomeSignIn from "../pages/WelcomeSignIn";
 import WelcomeSignUp from "../pages/WelcomeSignUp";
-import Products from "./Products";
-import About from "./About";
-import CategoryProducts from "./CategoryProducts";
-import ProductInfo from "./ProductInfo";
+import Products from "../Components/Products";
+import About from "../Components/About";
+import CategoryProducts from "../Components/CategoryProducts";
+import ProductInfo from "../Components/ProductInfo";
 
 const AppRoutes = () => {
   return (
