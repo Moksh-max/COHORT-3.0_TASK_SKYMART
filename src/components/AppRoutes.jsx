@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
 import { Route, Routes } from "react-router";
 import HomePage from "../pages/HomePage";
-import SignIn from "../Components/SignIn";
-import SignUp from "../Components/SignUp";
+import SignIn from "../components/SignIn";
+import SignUp from "../components/SignUp";
 import WelcomeSignIn from "../pages/WelcomeSignIn";
 import WelcomeSignUp from "../pages/WelcomeSignUp";
-import Products from "../Components/Products";
-import About from "../Components/About";
-import CategoryProducts from "../Components/CategoryProducts";
-import ProductInfo from "../Components/ProductInfo";
+import Products from "../components/Products";
+import About from "../components/About";
+import CategoryProducts from "../components/CategoryProducts";
+import ProductInfo from "../components/ProductInfo";
 import Navbar from "../components/Navbar";
-import ProtectedRoute from "../Components/ProtectedRoute";
-import PublicRoute from "../Components/PublicRoute";
+import ProtectedRoute from "../components/ProtectedRoute";
+import PublicRoute from "../components/PublicRoute";
 import { MyStore } from "../Context/MyContext";
 
 const AppRoutes = () => {

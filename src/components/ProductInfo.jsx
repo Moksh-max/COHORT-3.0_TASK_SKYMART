@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useNavigate, useParams } from "react-router";
 import { MyStore } from "../Context/MyContext";
-import Navbar from "../Components/Navbar";
+import Navbar from "../components/Navbar";
 import { Star, ShoppingCart, Heart } from "lucide-react";
-import Cart from "../Components/Cart";
+import Cart from "../components/Cart";
 import { toast } from "react-toastify";
 
 const ProductInfo = () => {

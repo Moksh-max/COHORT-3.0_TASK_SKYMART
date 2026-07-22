@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { X } from "lucide-react";
 import { MyStore } from "../Context/MyContext";
-import CartCard from "../Components/CartCard";
+import CartCard from "../components/CartCard";
 
 const Cart = ({ isCartOpen, setIsCartOpen }) => {
   const { cartData } = useContext(MyStore);

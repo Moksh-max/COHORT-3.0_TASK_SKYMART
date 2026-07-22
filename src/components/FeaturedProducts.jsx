@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Star, ShoppingCart } from "lucide-react";
-import ProductCard from "../Components/ProductCard";
+import ProductCard from "../components/ProductCard";
 import { MyStore } from "../Context/MyContext";
 
 const FeaturedProducts = () => {
