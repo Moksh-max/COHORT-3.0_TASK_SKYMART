@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Package,
   IndianRupee,
   Star,
   Tags,
 } from "lucide-react";
+import { MyStore } from "../Context/MyContext";
+
+
+
+
+
+const Stats = () => {
+const {cartItems} = useContext(MyStore);
 
 const stats = [
   {
-    title: "0",
+    title: cartItems,
     subtitle: "Cart Items",
     desc: "In your bag",
     icon: <Package size={24} />,
@@ -29,7 +37,7 @@ const stats = [
     color: "bg-yellow-500/10 text-yellow-400",
   },
   {
-    title: "6",
+    title: "4",
     subtitle: "Categories",
     desc: "To explore",
     icon: <Tags size={24} />,
@@ -37,7 +45,7 @@ const stats = [
   },
 ];
 
-const Stats = () => {
+
   return (
     <section className="max-w-7xl mx-auto mt-10">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

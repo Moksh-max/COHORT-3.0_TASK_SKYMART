@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
 import { MyStore } from "../Context/MyContext";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const { setCurrentUser } = useContext(MyStore);
@@ -21,11 +22,12 @@ const SignIn = () => {
     );
 
     if (user) {
-      console.log("Login Successful");
+     toast.success("Login Successful 🎉");
+
       localStorage.setItem("currentUser", JSON.stringify(user));
       navigate("/home");
     } else {
-      console.log("Invalid Email or Password");
+       toast.error("Invalid Email or Password ❌");
     }
 
     reset();

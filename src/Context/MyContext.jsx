@@ -5,6 +5,10 @@ import axios from "axios";
 export const MyStore = createContext();
 
 export const ContextProvider = ({ children }) => {
+
+
+
+
   //api call
   const [products, setProducts] = useState([]);
 
@@ -29,7 +33,15 @@ export const ContextProvider = ({ children }) => {
   const [cartData, setCartData] = useState(() => {
     return JSON.parse(localStorage.getItem("cartData")) || [];
   });
-  console.log(cartData);
+  // console.log(cartData);
+
+  const [cartItems, setcartItems] = useState(() => {
+    return JSON.parse(localStorage.getItem("cartItems")) || 0;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   //-------------------------------------------
 
@@ -64,6 +76,8 @@ export const ContextProvider = ({ children }) => {
         setProducts,
         cartData,
         setCartData,
+        cartItems,
+        setcartItems,
       }}
     >
       {children}

@@ -1,47 +1,44 @@
 import React, { useContext } from "react";
 import { Star, ShoppingCart } from "lucide-react";
 import { MyStore } from "../Context/MyContext";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const ProductCard = ({ product }) => {
-  const { setCartData, cartData , setIsCartOpen } = useContext(MyStore);
+  const navigate = useNavigate();
+  const { setCartData, cartData, setIsCartOpen, cartItems, setcartItems } =
+    useContext(MyStore);
 
- const handleAddToCart = () => {
-  let updatedCart;
+  const handleAddToCart = () => {
+    toast.success("Added to Cart✅");
+    let updatedCart;
 
-  const existingItem = cartData.find(
-    (item) => item.id === product.id
-  );
+    const existingItem = cartData.find((item) => item.id === product.id);
 
-  if (existingItem) {
-    updatedCart = cartData.map((item) =>
-      item.id === product.id
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
-    );
-  } else {
-    updatedCart = [
-      ...cartData,
-      { ...product, quantity: 1 },
-    ];
-  }
+    if (existingItem) {
+      updatedCart = cartData.map((item) =>
+        item.id === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item,
+      );
+    } else {
+      updatedCart = [...cartData, { ...product, quantity: 1 }];
+      setcartItems(cartItems + 1);
+    }
 
-  setCartData(updatedCart);
+    setCartData(updatedCart);
 
-  localStorage.setItem(
-    "cartData",
-    JSON.stringify(updatedCart)
-  );
+    localStorage.setItem("cartData", JSON.stringify(updatedCart));
 
-  setIsCartOpen(true);
-};
+    setIsCartOpen(true);
+  };
 
   return (
-
-    
-    <div className="group bg-[#111] rounded-3xl overflow-hidden border border-zinc-800 hover:border-[#C8F400] transition-all duration-300 hover:-translate-y-2">
+    <div  className="group bg-[#111] rounded-3xl overflow-hidden border border-zinc-800 hover:border-[#C8F400] transition-all duration-300 hover:-translate-y-2">
       {/* Image */}
       <div className="h-64 bg-white p-6 flex items-center justify-center overflow-hidden">
         <img
+        onClick={()=> navigate(`/product/${product.id}`)}
           src={product.image}
           alt={product.title}
           className="h-full object-contain group-hover:scale-110 transition duration-500"

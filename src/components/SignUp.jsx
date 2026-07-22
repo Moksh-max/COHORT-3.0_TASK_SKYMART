@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router";
 import { MyStore } from "../Context/MyContext";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ const SignUp = () => {
   let { users, setUsers } = useContext(MyStore);
 
   const formSubmit = (data) => {
+    toast.success("Login Successful 🎉");
+
     const updatedUsers = [...users, data];
 
     setUsers(updatedUsers);
@@ -28,7 +31,6 @@ const SignUp = () => {
 
     navigate("/home");
     setCurrentUser(data);
-    console.log(data);
     
     reset();
   };
@@ -172,7 +174,7 @@ const SignUp = () => {
         <p className="text-center mt-5 text-sm text-gray-400">
           Already have an account?{" "}
           <NavLink
-            to="/signIn"
+            to="/ "
             className="text-[#C8F400] font-semibold hover:underline"
           >
             Sign In

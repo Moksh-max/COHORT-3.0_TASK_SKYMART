@@ -4,5 +4,5 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/COHORT-3.0_TASK_SKYMART/",
+  // base: "/COHORT-3.0_TASK_SKYMART/",
 });

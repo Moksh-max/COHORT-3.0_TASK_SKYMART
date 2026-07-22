@@ -3,31 +3,8 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { MyStore } from "../Context/MyContext";
 
 const CartCard = ({ product }) => {
-  const { cartData, setCartData } = useContext(MyStore);
+  const { cartData, setCartData , setcartItems , cartItems } = useContext(MyStore);
 
-  const increaseQuantity = () => {
-    setCartData(
-      cartData.map((item) =>
-        item.id === product.id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item,
-      ),
-    );
-  };
-
-  const decreaseQuantity = () => {
-    if (product.quantity === 1) {
-      setCartData(cartData.filter((item) => item.id !== product.id));
-    } else {
-      setCartData(
-        cartData.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item,
-        ),
-      );
-    }
-  };
 
   const deleteProduct = () => {
   const updatedCart = cartData.filter(
@@ -35,6 +12,7 @@ const CartCard = ({ product }) => {
   );
 
   setCartData(updatedCart);
+  setcartItems(cartItems - 1)
 
   localStorage.setItem(
     "cartData",
@@ -72,13 +50,13 @@ const CartCard = ({ product }) => {
         <div className="flex justify-between items-center mt-3">
           {/* Quantity */}
           <div className="flex items-center bg-[#1A1A1A] rounded-lg overflow-hidden">
-            <button onClick={decreaseQuantity} className="p-2 hover:bg-zinc-700 transition">
+            <button className="p-2 hover:bg-zinc-700 transition">
               <Minus size={16} />
             </button>
 
             <span className="px-4 font-semibold">1</span>
 
-            <button onClick={increaseQuantity} className="p-2 hover:bg-zinc-700 transition">
+            <button  className="p-2 hover:bg-zinc-700 transition">
               <Plus size={16} />
             </button>
           </div>
