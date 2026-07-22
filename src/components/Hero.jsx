@@ -5,7 +5,19 @@ import { useNavigate } from "react-router";
 
 const Hero = () => {
   const navigate = useNavigate();
-  const { currentUser} = useContext(MyStore);
+  const { currentUser } = useContext(MyStore);
+  const hour = new Date().getHours();
+  let greeting = "";
+
+  if (hour >= 5 && hour < 12) {
+    greeting = "Good Morning ";
+  } else if (hour >= 12 && hour < 17) {
+    greeting = "Good Afternoon ";
+  } else if (hour >= 17 && hour < 21) {
+    greeting = "Good Evening ";
+  } else {
+    greeting = "Good Night ";
+  }
   return (
     <section className="max-w-7xl mx-auto mt-10">
       <div
@@ -22,13 +34,15 @@ const Hero = () => {
           {/* Left */}
           <div className="max-w-2xl">
             <p className="uppercase tracking-widest text-[#C8F400] font-semibold mb-6">
-              Good Evening 👋
+              {greeting} 👋
             </p>
 
             <h1 className="text-5xl md:text-7xl font-black leading-tight">
               Welcome back,
               <br />
-              <span className="text-[#C8F400]">{currentUser?.name  || "hacker"}!</span>
+              <span className="text-[#C8F400]">
+                {currentUser?.name || "hacker"}!
+              </span>
             </h1>
 
             <p className="mt-6 text-zinc-400 text-lg max-w-xl leading-8">

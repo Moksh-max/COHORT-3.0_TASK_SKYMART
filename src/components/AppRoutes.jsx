@@ -19,7 +19,7 @@ const AppRoutes = () => {
   return (
     <div className="text-white pr-20 ">
       {currentUser && <Navbar />}
-      <div className={currentUser ? "pt-20" : ""}>
+      <div className={currentUser ? "pt-20 " : ""}>
         <Routes>
           <Route
             path="/home"
