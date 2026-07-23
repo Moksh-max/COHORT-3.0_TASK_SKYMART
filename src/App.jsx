@@ -9,7 +9,7 @@ const App = () => {
     <div className="min-h-screen w-full bg-black overflow-x-hidden">
       <>
         <AppRoutes />
-        <ToastContainer position="bottom-right" autoClose={3000} theme="dark" />
+        <ToastContainer position="top-left" autoClose={3000} theme="dark" />
       </>
     </div>
   );
